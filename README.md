@@ -1,91 +1,171 @@
 # Financial Crime Investigation AI Agent
 
-A modular educational project using Python, SQLite, LangGraph, optional Groq LLM explanations, and retrieval of compliance policy documents.
+An AI-powered financial crime investigation system built using **Python, LangGraph, FastAPI, SQLite, RAG, and Groq LLM** to identify potentially suspicious banking transactions and generate evidence-based investigation reports.
 
-## Important design boundaries
-- Transaction detection is deterministic Python code. The LLM does not calculate totals or decide whether a transaction is suspicious.
-- An alert is an indicator for review, not proof of money laundering or other wrongdoing.
-- The system produces decision-support material only. A qualified human analyst makes any escalation or filing decision.
-- The sample records and customer profiles are synthetic. Do not use real personal or banking data in this demo.
+## Key Features
 
-## Input transaction schema
+- Deterministic transaction pattern detection (structuring).
+- AI agent workflow orchestration using LangGraph.
+- Account, transaction, and historical alert retrieval.
+- RAG-based AML policy retrieval using TF-IDF.
+- Optional Groq LLM for analyst-friendly explanations.
+- FastAPI backend with REST endpoints.
+- Interactive frontend dashboard using HTML, CSS, and JavaScript.
 
-The transaction CSV follows the supplied format:
+## Architecture
 
-`txn_id,account_id,counterparty,amount,direction,timestamp,channel`
+```text
+Transaction Data
+       |
+       v
+  SQLite Database
+       |
+       v
+  Python Tools
+       |
+       v
+Deterministic Detection
+       |
+       v
+ LangGraph Workflow
+       |
+    +--+--+
+    |     |
+    v     v
+   RAG   Evidence
+    |     |
+    +--+--+
+       |
+       v
+   Groq LLM
+   (Optional)
+       |
+       v
+Investigation Report
+       |
+       v
+ FastAPI + Frontend
+```
 
-`customer_id` is not required. Investigations are keyed by `account_id`.
+## Technology Stack
 
-## Setup (Windows PowerShell)
+| Technology | Purpose |
+|---|---|
+| Python, Pandas | Data processing |
+| SQLite | Database |
+| LangGraph | Agent orchestration |
+| Groq LLM | AI explanations |
+| RAG, TF-IDF | Policy retrieval |
+| FastAPI | Backend API |
+| HTML, CSS, JavaScript | Frontend |
+| Pytest | Testing |
+
+## Project Structure
+
+```text
+financial-crime-investigation-agent/
+├── agent/
+├── api/
+├── config/
+├── data/
+├── database/
+├── detector/
+├── evaluation/
+├── frontend/
+├── llm/
+├── rag/
+├── tests/
+├── tools/
+├── main.py
+├── requirements.txt
+├── .env.example
+└── README.md
+```
+
+## Installation & Setup
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/arun2544/financial-crime-investigation-agent.git
+cd financial-crime-investigation-agent
+```
+
+**2. Create and activate virtual environment**
 
 ```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+```
+
+**3. Install dependencies**
+
+```bash
 pip install -r requirements.txt
+```
+
+**4. Configure environment**
+
+```powershell
 Copy-Item .env.example .env
 ```
 
-Add a Groq API key to `.env` to enable LLM-generated narrative. Without a key, the project creates a deterministic report.
+Add your Groq API key to `.env` (optional).
 
-## Configure data
-- Replace `data/transactions.csv` with your dataset, keeping the exact column names.
-- Add or edit optional account profiles in `data/account_profiles.csv`.
-- Add policy PDFs or TXT files under `data/policies/`.
+**5. Initialize database and RAG index**
 
-## Initialize SQLite
-
-```powershell
+```bash
 python -m database.seed_data
-```
-
-## Build / refresh the policy retrieval index
-
-```powershell
 python -m rag.build_index
 ```
 
-The starter retriever uses TF-IDF text vectors so it can run locally without downloading embedding models. It can later be replaced with sentence-transformer embeddings and a vector database.
+## Run the Application
 
-## Run one account investigation
+**Backend:**
 
-```powershell
-python main.py --account-id ACC-3010
-```
-
-## Run the API
-
-```powershell
+```bash
 uvicorn api.routes:app --reload
 ```
 
-Open `http://127.0.0.1:8000/docs`. POST `/investigate` with:
+API documentation: http://127.0.0.1:8000/docs
 
-```json
-{"account_id": "ACC-3010"}
+**Frontend (in a second terminal):**
+
+```bash
+cd frontend
+python -m http.server 5500
 ```
 
-## Tests
+Dashboard: http://127.0.0.1:5500
 
-```powershell
-pytest -q
+**CLI investigation:**
+
+```bash
+python main.py --account-id ACC-3010
 ```
 
-## Workflow
+## Testing
 
-1. Read transactions for the requested account from SQLite.
-2. Run deterministic credit-structuring detection on the supplied transaction schema.
-3. Retrieve optional account profile and historical alerts.
-4. Retrieve relevant policy snippets.
-5. Pass structured evidence into a LangGraph workflow.
-6. Optionally ask Groq to write a cautious analyst-facing explanation.
-7. Return and save a report with evidence and a human-review recommendation.
+```bash
+python -m pytest -q
+```
 
-## Notes about the starter detection rule
+## Detection Logic
 
-The included rule flags groups of at least `min_transaction_count` credit transactions where:
-- each transaction is individually below the configured threshold,
-- transactions belong to the same account,
-- their combined amount is greater than the threshold, and
-- they fall within the configured rolling time window.
+The system identifies potential structuring patterns where:
 
-This is a configurable educational example, not a complete AML monitoring system. Tune thresholds only against approved policy and labelled validation data.
+- Multiple credit transactions belong to the same account.
+- Each transaction is below the configured threshold.
+- Their combined amount exceeds the threshold.
+- Transactions occur within the configured rolling time window.
+
+## Important Design Decisions
+
+- Transaction detection uses deterministic Python rules.
+- The LLM only explains structured evidence; it does not decide whether transactions are suspicious.
+- RAG provides relevant AML policy context.
+- Investigation reports support human review, not automated compliance decisions.
+
+## Disclaimer
+
+This is an educational project using synthetic banking data. It is not a production AML monitoring system. All investigation findings require qualified human review.
