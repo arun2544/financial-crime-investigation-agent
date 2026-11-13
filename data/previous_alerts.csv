@@ -1,0 +1,2 @@
+alert_id,account_id,alert_type,created_at,status,notes
+AL-001,ACC-3010,Unusual credit activity,2025-11-15,closed,synthetic historical alert

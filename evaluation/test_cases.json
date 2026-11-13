@@ -1,0 +1,12 @@
+[
+  {
+    "account_id": "ACC-3010",
+    "expected_rule_alert": false,
+    "note": "Only one credit in sample data."
+  },
+  {
+    "account_id": "ACC-5123",
+    "expected_rule_alert": false,
+    "note": "One credit above the individual threshold."
+  }
+]

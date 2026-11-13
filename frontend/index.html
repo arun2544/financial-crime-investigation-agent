@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel | Financial Crime Investigation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">S</div>
+                <div>
+                    <h2>Sentinel</h2>
+                    <span>Investigation Workspace</span>
+                </div>
+            </div>
+
+            <nav>
+                <a class="active" href="#">◈ Dashboard</a>
+                <a href="#investigation">⌕ Investigations</a>
+                <a href="#results">▤ Reports</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <span class="status-dot"></span>
+                <span>Investigation system</span>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h1>Investigation Dashboard</h1>
+                    <p>AI-powered financial crime investigation</p>
+                </div>
+                <div class="api-status" id="apiStatus">
+                    <span class="status-dot"></span>
+                    Checking API...
+                </div>
+            </header>
+
+            <section class="welcome">
+                <div>
+                    <h2>Financial Crime Investigation</h2>
+                    <p>
+                        Investigate accounts, identify suspicious transaction
+                        patterns and generate evidence-based reports.
+                    </p>
+                </div>
+                <div class="welcome-icon">⌁</div>
+            </section>
+
+            <section class="stats">
+                <div class="stat-card">
+                    <span>System</span>
+                    <h2 id="systemStatus">Checking</h2>
+                    <small>Backend connection</small>
+                </div>
+                <div class="stat-card">
+                    <span>Investigation mode</span>
+                    <h2>AI + Rules</h2>
+                    <small>Hybrid investigation</small>
+                </div>
+                <div class="stat-card">
+                    <span>Decision process</span>
+                    <h2>Human Review</h2>
+                    <small>Analyst remains in control</small>
+                </div>
+            </section>
+
+            <section class="panel" id="investigation">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Start Investigation</h2>
+                        <p>Enter an account ID to investigate its activity.</p>
+                    </div>
+                    <span class="tag">NEW INVESTIGATION</span>
+                </div>
+
+                <form id="investigationForm">
+                    <label for="accountId">Account ID</label>
+                    <div class="search-row">
+                        <input
+                            id="accountId"
+                            type="text"
+                            placeholder="Example: ACC-3010"
+                            value="ACC-3010"
+                            required
+                        >
+                        <button id="investigateBtn" type="submit">
+                            Investigate Account →
+                        </button>
+                    </div>
+                </form>
+
+                <p id="message" class="message"></p>
+            </section>
+
+            <section class="results-section" id="results">
+                <div class="section-heading">
+                    <div>
+                        <h2>Investigation Results</h2>
+                        <p>Evidence and findings returned by the AI agent.</p>
+                    </div>
+                    <button id="downloadBtn" class="secondary-btn" disabled>
+                        ↓ Export JSON
+                    </button>
+                </div>
+
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">⌕</div>
+                    <h3>No investigation yet</h3>
+                    <p>Enter an account ID above to generate an investigation report.</p>
+                </div>
+
+                <div id="report" class="hidden">
+                    <div class="result-card">
+                        <span class="eyebrow">ACCOUNT INVESTIGATED</span>
+                        <h2 id="resultAccount">-</h2>
+                        <p id="transactionCount">- transactions reviewed</p>
+                    </div>
+
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <h3>Findings</h3>
+                            <p id="findings">-</p>
+                        </div>
+                        <div class="result-card">
+                            <h3>Recommendation</h3>
+                            <p id="recommendation">-</p>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Account Profile</h3>
+                        <div id="profile" class="data-grid"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Transaction Evidence</h3>
+                        <div id="evidence"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Previous Alerts</h3>
+                        <div id="alerts"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Retrieved AML Policy Context</h3>
+                        <div id="policy"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Full Investigation Response</h3>
+                        <pre id="rawJson"></pre>
+                    </div>
+
+                    <p class="disclaimer" id="disclaimer"></p>
+                </div>
+            </section>
+
+            <footer>
+                Sentinel Financial Crime Investigation System ·
+                Decision support only
+            </footer>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

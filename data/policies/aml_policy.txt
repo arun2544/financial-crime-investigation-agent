@@ -1,0 +1,5 @@
+Illustrative AML policy notes for a software demo
+Alerts are indicators for review, not proof of wrongdoing.
+Analysts should consider account profile, expected activity, transaction counterparties, channels, and historical context.
+Escalation decisions must follow the institution's approved procedures and applicable law.
+Record the evidence supporting each finding and distinguish observed facts from hypotheses.

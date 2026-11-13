@@ -1,0 +1,12 @@
+account_id,account_type,account_open_date,occupation,expected_monthly_volume,notes
+ACC-3010,savings,2022-04-12,not_provided,30000,synthetic demo profile
+ACC-5124,current,2021-08-20,not_provided,50000,synthetic demo profile
+ACC-5078,savings,2024-02-01,not_provided,25000,synthetic demo profile
+ACC-5121,savings,2020-05-15,not_provided,40000,synthetic demo profile
+ACC-5030,current,2023-01-10,not_provided,80000,synthetic demo profile
+ACC-5015,savings,2022-09-18,not_provided,20000,synthetic demo profile
+ACC-5013,savings,2021-03-22,not_provided,35000,synthetic demo profile
+ACC-5125,current,2024-06-30,not_provided,30000,synthetic demo profile
+ACC-5075,current,2020-11-11,not_provided,90000,synthetic demo profile
+ACC-5022,current,2019-07-07,not_provided,100000,synthetic demo profile
+ACC-5123,savings,2022-12-01,not_provided,120000,synthetic demo profile

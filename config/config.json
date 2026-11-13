@@ -1,0 +1,12 @@
+{
+  "database_path": "data/investigation.db",
+  "transactions_csv": "data/transactions.csv",
+  "profiles_csv": "data/account_profiles.csv",
+  "alerts_csv": "data/previous_alerts.csv",
+  "policies_dir": "data/policies",
+  "structuring": {
+    "threshold": 50000,
+    "rolling_window_hours": 72,
+    "min_transaction_count": 3
+  }
+}

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+*.py[cod]
+data/*.db
+rag/index/
+output/reports/*
+!output/reports/.gitkeep
